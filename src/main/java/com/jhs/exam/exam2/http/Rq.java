@@ -27,19 +27,19 @@ public class Rq {
 	private String controllerName;
 	@Getter
 	private String actionMethodName;
-	
+
 	@Getter
 	@Setter
 	private boolean isLogined = false;
-	
+
 	@Getter
 	@Setter
 	private int loginedMemberId = 0;
-	
+
 	@Getter
 	@Setter
 	private Member loginedMember = null;
-	
+
 	public boolean isNotLogined() {
 		return isLogined == false;
 	}
@@ -173,5 +173,25 @@ public class Rq {
 
 	public String getActionPath() {
 		return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
+	}
+
+	public String getAttr(String attrName, String defaultValue) {
+		String attrValue = (String) req.getAttribute(attrName);
+
+		if (attrValue == null) {
+			return defaultValue;
+		}
+
+		return attrValue;
+	}
+
+	public int getIntAttr(String attrName, int defaultValue) {
+		Integer attrValue = (Integer)req.getAttribute(attrName);
+
+		if (attrValue == null) {
+			return defaultValue;
+		}
+
+		return attrValue;
 	}
 }
