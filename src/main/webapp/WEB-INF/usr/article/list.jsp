@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.jhs.exam.exam2.http.Rq"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="게시물 리스트" />
@@ -16,14 +15,14 @@
 				</a>
 				<span>게시물 리스트</span>
 			</div>
-			
+
 			<div class="px-4 py-4">
-				<div class="badge badge-primary">전체게시물 개수</div>			
+				<div class="badge badge-primary">전체게시물 개수</div>
 				${totalItemsCount}
 			</div>
-			
+
 			<hr />
-			
+
 			<div class="px-4">
 				<c:forEach items="${articles}" var="article">
 					<c:set var="detailUri" value="../article/detail?id=${article.id}" />
@@ -74,32 +73,35 @@
 							<div class="line-clamp-3">${article.bodySummaryForPrint}</div>
 						</a>
 					</div>
-					
+
 					<div class="btns mt-3">
 						<c:if test="${article.extra__actorCanModify}">
 							<a href="../article/modify?id=${article.id}" class="btn btn-link">
-								<span><i class="fas fa-edit"></i></span> <span>수정</span>
+								<span>
+									<i class="fas fa-edit"></i>
+								</span>
+								<span>수정</span>
 							</a>
 						</c:if>
 						<c:if test="${article.extra__actorCanDelete}">
 							<a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;"
 								href="../article/doDelete?id=${article.id}" class="btn btn-link">
-								<span><i class="fas fa-trash-alt"></i></span> <span>삭제</span>
+								<span>
+									<i class="fas fa-trash-alt"></i>
+								</span>
+								<span>삭제</span>
 							</a>
 						</c:if>
 					</div>
-					
+
 					<hr />
 				</c:forEach>
-				
+
 				<div class="page-menu">
-					<%
-					Rq rq = (Rq)request.getAttribute("rq");
-					int totalPage = rq.getIntAttr("totalPage", 10);
-					%>
-					<% for ( int i = 1; i <= totalPage; i++ ) { %>
-					<a href="?page=<%=i%>"><%=i%></a>
-					<% } %>
+					<c:forEach var="i" begin="1"
+						end="${rq.getIntAttr('totalPage', 10)}" step="1">
+						${i}
+					</c:forEach>
 				</div>
 			</div>
 		</div>
