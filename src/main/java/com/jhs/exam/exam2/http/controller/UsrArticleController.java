@@ -93,20 +93,22 @@ public class UsrArticleController extends Controller {
 		String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "title");
 		String searchKeyword = rq.getParam("searchKeyword", "");
 		
-		int itemsCountInAPage = 5;
+		int itemsCountInAPage = 5; 
 		int page = rq.getIntParam("page", 1);
 		
 		int totalItemsCount = articleService.getArticlesCount(searchKeywordTypeCode, searchKeyword);
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 		
+		int totalPage = 20;
+		
+		rq.setAttr("totalPage", totalPage);
 		rq.setAttr("totalItemsCount", totalItemsCount);
-
 		rq.setAttr("articles", articles);
 		rq.jsp("usr/article/list");
 	}
 
 	private void actionDoWrite(Rq rq) {
-		int boardId = 1;
+		int boardId = 1; // 임시구현 //rq.getIntParam("boardId", 0);
 		int memberId = rq.getLoginedMemberId();
 		String title = rq.getParam("title", "");
 		String body = rq.getParam("body", "");
@@ -158,7 +160,7 @@ public class UsrArticleController extends Controller {
 		Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
 		if (article == null) {
-			rq.historyBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 			return;
 		}
 
