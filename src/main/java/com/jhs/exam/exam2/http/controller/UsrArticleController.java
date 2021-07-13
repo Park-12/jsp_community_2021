@@ -99,7 +99,7 @@ public class UsrArticleController extends Controller {
 		int totalItemsCount = articleService.getArticlesCount(searchKeywordTypeCode, searchKeyword);
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 		
-		int totalPage = 10;
+		int totalPage = (int)Math.ceil((double)totalItemsCount / itemsCountInAPage);
 		
 		rq.setAttr("totalPage", totalPage);
 		rq.setAttr("totalItemsCount", totalItemsCount);
