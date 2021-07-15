@@ -26,31 +26,32 @@ public class DispatcherServlet extends HttpServlet {
 		if (runInterceptors(rq) == false) {
 			return;
 		}
-		
-		Controller controller = null;
 
-		switch (rq.getControllerTypeName()) {
-		case "usr":
-			switch (rq.getControllerName()) {
-			case "article":
-				controller = Container.usrArticleController;
-				break;
-			case "member":
-				controller = Container.usrMemberController;
-				break;
-			}
-
-			break;
-		}
+		Controller controller = getControllerByRq(rq);
 
 		if (controller != null) {
 			controller.performAction(rq);
 
 			MysqlUtil.closeConnection();
-		}
-		else {
+		} else {
 			rq.print("올바른 요청이 아닙니다.");
 		}
+	}
+
+	private Controller getControllerByRq(Rq rq) {
+		switch (rq.getControllerTypeName()) {
+		case "usr":
+			switch (rq.getControllerName()) {
+			case "article":
+				return Container.usrArticleController;
+			case "member":
+				return Container.usrMemberController;
+			}
+
+			break;
+		}
+
+		return null;
 	}
 
 	private boolean runInterceptors(Rq rq) {
