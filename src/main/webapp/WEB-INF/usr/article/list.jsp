@@ -19,7 +19,7 @@
 				<div class="badge badge-primary">
 					<c:if test="${param.searchKeyword == null}">
 						전체게시물 개수
-					</c:if>	
+					</c:if>
 					<c:if test="${param.searchKeyword != null}">
 						검색어 `${param.searchKeyword}`, 게시물 개수
 					</c:if>
@@ -43,17 +43,23 @@
 								<option value="title">제목</option>
 								<option value="body">내용</option>
 							</select>
+							<script>
+								if ( '${param.searchKeywordTypeCode}'.trim().length > 0 ) {
+									$('.section-article-write select[name="searchKeywordTypeCode"]').val('${param.searchKeywordTypeCode}');									
+								}
+							</script>
 						</div>
 					</div>
+
 					<div class="form-control">
 						<label class="label">
 							<span class="label-text">검색어</span>
 						</label>
 						<div>
-							<input class="input input-bordered w-full max-w-md" maxlength="100" name="searchKeyword" type="text" placeholder="검색어를 입력해주세요."
-								value="${param.searchKeyword}" />
+							<input class="input input-bordered w-full max-w-md" maxlength="100" name="searchKeyword" type="text" placeholder="검색어를 입력해주세요." value="${param.searchKeyword}" />
 						</div>
 					</div>
+
 					<div class="btns">
 						<button type="submit" class="btn btn-link">검색</button>
 					</div>
@@ -61,6 +67,7 @@
 			</div>
 
 			<hr />
+
 			<div class="px-4">
 				<c:forEach items="${articles}" var="article">
 					<c:set var="detailUri" value="../article/detail?id=${article.id}" />
@@ -130,6 +137,7 @@
 
 				<div class="page-menu">
 					<c:set var="baseUri" value="?boardId=${boardId}" />
+
 					<c:set var="pageMenuArmSize" value="7" />
 					<c:set var="startPage" value="${page - pageMenuArmSize >= 1 ? page - pageMenuArmSize : 1}" />
 					<c:set var="endPage" value="${page + pageMenuArmSize <= totalPage ? page + pageMenuArmSize : totalPage}" />
