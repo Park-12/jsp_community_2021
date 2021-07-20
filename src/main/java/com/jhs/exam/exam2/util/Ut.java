@@ -1,5 +1,6 @@
 package com.jhs.exam.exam2.util;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,20 +23,20 @@ public class Ut {
 		WRAPPER_TYPE_MAP.put(Short.class, short.class);
 		WRAPPER_TYPE_MAP.put(Void.class, void.class);
 	}
-	
+
 	public static boolean isPrimitiveType(Object source) {
-	    return WRAPPER_TYPE_MAP.containsKey(source.getClass());
+		return WRAPPER_TYPE_MAP.containsKey(source.getClass());
 	}
-	
+
 	public static boolean isBaseType(Object source) {
 		if (isPrimitiveType(source)) {
 			return true;
 		}
-		
+
 		if (source instanceof String) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -102,4 +103,12 @@ public class Ut {
 			return null;
 		}
 	}
+
+	public static String getUriEncoded(String str) {
+        try {
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (Exception e) {
+            return str;
+        }
+    }
 }
