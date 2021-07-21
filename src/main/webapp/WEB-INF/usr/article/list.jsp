@@ -17,25 +17,25 @@
 
 			<div class="px-4 py-4">
 				<c:if test="${param.searchKeyword != null && param.searchKeyword != ''}">
-					<div class="badge badge-primary">
-						검색어 타입
-					</div>
+					<div class="badge badge-primary">검색어 타입</div>
 					<span>${param.searchKeywordTypeCode}</span>
-					
+
 					<br />
-					
-					<div class="badge badge-primary">
-						검색어
-					</div>
+
+					<div class="badge badge-primary">검색어</div>
 					<span>${param.searchKeyword}</span>
-					
+
 					<br />
 				</c:if>
-				
-				<div class="badge badge-primary">
-					전체게시물 개수
-				</div>
+
+				<div class="badge badge-primary">전체게시물 개수</div>
 				<span>${totalItemsCount}</span>
+			</div>
+
+			<hr />
+
+			<div class="btns px-4 py-4">
+				<a class="btn btn-link" href="../article/write?boardId=${boardId}">글쓰기</a>
 			</div>
 
 			<hr />
