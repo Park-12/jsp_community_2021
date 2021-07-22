@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle}| JSP BOARD</title>
+<title>${pageTitle}|JSPBOARD</title>
 
 <!-- 모바일에서 디자인이 축소되지 않게 하기 위한 코드 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,7 @@
 </head>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/common.css" />
+<script src="${pageContext.request.contextPath}/resource/common.js" defer="defer"></script>
 </head>
 
 <%="<script>"%>
@@ -36,7 +37,7 @@ const rqParams = ${rq.paramMapJsonStr};
 <body>
 	<div class="site-wrap min-h-screen flex flex-col">
 		<div class="h-12 flex-shrink-0 mb-4"></div>
-		<header class="mobile-top-bar fixed z-50 inset-0 h-10 font-bold bg-white shadow md:hidden">
+		<header class="mobile-top-bar fixed z-40 inset-0 h-10 font-bold bg-white shadow md:hidden">
 			<div class="h-full flex">
 				<a href="../../" class="logo flex items-center px-4 hover:underline hover:text-red-500">
 					<span>
@@ -54,15 +55,97 @@ const rqParams = ${rq.paramMapJsonStr};
 				</a>
 			</div>
 		</header>
-		<header class="top-bar fixed z-50 inset-0 h-12 font-bold bg-white shadow hidden md:block">
+
+		<div class="mobile-side-bar fixed z-50 bg-white flex flex-col">
+			<header class="flex flex-col items-center flex-shrink-0 shadow">
+				<a href="../../" class="logo flex justify-center w-full pt-4 pb-2 hover:underline hover:text-red-500 text-2xl">
+					<span>
+						<i class="far fa-lemon"></i>
+					</span>
+					<span class="flex"> &nbsp;Lemon </span>
+				</a>
+
+				<a class="flex justify-center w-full text-xl btn-close-mobile-side-bar pt-2 pb-4  hover:text-red-500">
+					<span>
+						<i class="fas fa-times"></i>
+					</span>
+				</a>
+			</header>
+			<section class="body flex-grow flex justify-center items-center overflow-y-auto">
+				<nav class="mobile-side-bar__menu-box-1 text-xl m-auto">
+					<ul>
+						<li>
+							<a href="../../" class="flex py-2 hover:underline hover:text-red-500">
+								<span>
+									<i class="fas fa-home"></i>
+								</span>
+								<span>&nbsp;HOME</span>
+							</a>
+						</li>
+						<li>
+							<a href="../article/list?boardId=1" class="flex py-2 hover:underline hover:text-red-500">
+								<span>
+									<i class="fas fa-flag"></i>
+								</span>
+								<span>&nbsp;NOTICE LIST</span>
+							</a>
+						</li>
+						<li>
+							<a href="../article/list?boardId=2" class="flex py-2 hover:underline hover:text-red-500">
+								<span>
+									<i class="fab fa-free-code-camp"></i>
+								</span>
+								<span>&nbsp;FREE LIST</span>
+							</a>
+						</li>
+						<c:if test="${rq.notLogined}">
+							<li>
+								<a href="../member/login?afterLoginUri=${rq.encodedAfterLoginUri}" class="flex py-2 hover:underline hover:text-red-500">
+									<span>
+										<i class="fas fa-sign-in-alt"></i>
+									</span>
+									<span>&nbsp;LOGIN</span>
+								</a>
+							</li>
+							<li>
+								<a href="../member/join" class="flex py-2 hover:underline hover:text-red-500">
+									<span>
+										<i class="fas fa-user-plus"></i>
+									</span>
+									<span>&nbsp;JOIN</span>
+								</a>
+							</li>
+						</c:if>
+						<c:if test="${rq.logined}">
+							<li>
+								<a href="../member/doLogout" class="flex py-2 hover:underline hover:text-red-500">
+									<span>
+										<i class="fas fa-sign-out-alt"></i>
+									</span>
+									<span>&nbsp;LOGOUT</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="flex py-2 hover:underline hover:text-red-500">
+									<span>
+										<i class="fas fa-user"></i>
+									</span>
+									<span>&nbsp;MY PAGE</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
+			</section>
+		</div>
+
+		<header class="top-bar fixed z-40 inset-0 h-12 font-bold bg-white shadow hidden md:block">
 			<div class="h-full container mx-auto flex">
 				<a href="../../" class="logo flex items-center px-4 hover:underline hover:text-red-500">
 					<span>
 						<i class="far fa-lemon"></i>
 					</span>
-					<span class="flex">
-						&nbsp;Lemon
-					</span>
+					<span class="flex"> &nbsp;Lemon </span>
 				</a>
 
 				<div class="flex-grow"></div>
@@ -70,7 +153,7 @@ const rqParams = ${rq.paramMapJsonStr};
 				<nav class="top-bar__menu-box-1">
 					<ul class="flex h-full -mr-2">
 						<li>
-							<a href="../../" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<a href="../../" class="h-full flex items-center px-6 hover:underline hover:text-red-500">
 								<span>
 									<i class="fas fa-home"></i>
 								</span>
@@ -104,7 +187,7 @@ const rqParams = ${rq.paramMapJsonStr};
 								</a>
 							</li>
 							<li>
-								<a href="../member/join" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+								<a href="../member/join" class="h-full flex items-center px-6 hover:underline hover:text-red-500">
 									<span>
 										<i class="fas fa-user-plus"></i>
 									</span>
