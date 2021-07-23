@@ -4,38 +4,28 @@
 <c:set var="pageTitle" value="홈" />
 <%@ include file="../part/head.jspf"%>
 
-<section class="section section-home-main px-4">
-	<div class="container mx-auto">
+<section class="section section-home-main">
+	<div class="container mx-auto card-wrap">
 
 		<div class="card bordered shadow-lg">
 			<div class="card-title">
-				<a href="javascript:history.back();" class="cursor-pointer">
-					<i class="fas fa-chevron-left"></i>
+				<a>
+					<i class="fas fa-home"></i>
 				</a>
 				<span>홈</span>
 			</div>
-
-			<div>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium aperiam voluptatem eveniet necessitatibus sint quam
-					ipsa illum eum minima voluptatibus unde nam reprehenderit repellendus a obcaecati magnam accusantium distinctio tempora.</div>
-				<div>Est culpa quasi repellendus dolores. Nobis nam nemo sapiente commodi dicta asperiores quos rerum aspernatur corrupti dolor
-					accusantium quas impedit ab alias recusandae perferendis doloremque illum eligendi. Saepe quasi ipsam.</div>
-				<div>Et esse libero natus sequi assumenda fugit sunt tempore hic numquam minima excepturi quod dolorem aliquid a cupiditate vel
-					repellat obcaecati. Ipsum consequatur ipsam nobis facere maxime quaerat ad tenetur!</div>
-				<div>Quia laudantium debitis ex animi obcaecati enim praesentium. Expedita corporis consequatur velit voluptates voluptatibus
-					dolorum minima eos ipsam harum unde eveniet consectetur maiores repellat. Iure et facere quisquam blanditiis eum!</div>
-				<div>Est autem doloribus nihil eveniet animi omnis magnam provident minus dignissimos laboriosam atque aut maiores deserunt
-					perspiciatis beatae aliquid explicabo totam. Totam inventore odio amet atque ea nisi deleniti ducimus!</div>
-				<div>Inventore asperiores sed esse repellat delectus debitis mollitia atque ipsa quidem reprehenderit recusandae dolor similique
-					natus maiores alias unde reiciendis ea soluta? Culpa ad nemo consectetur molestiae labore! Qui reiciendis!</div>
-				<div>Eum sequi perferendis est quaerat itaque vero! Laudantium id ab incidunt vel maiores possimus molestiae placeat earum in quod
-					a consectetur vitae quibusdam assumenda molestias minus laboriosam accusamus. Quia dolore!</div>
-				<div>Nihil tempora veniam delectus doloremque repellat sint facilis harum deleniti obcaecati odit enim cum dicta quia sed ullam
-					eveniet unde suscipit non autem id officiis consequuntur totam libero illum itaque.</div>
-				<div>Sunt itaque quo officiis voluptatum maxime sapiente accusamus eaque mollitia consequatur temporibus numquam laborum dolorum
-					ratione quaerat nemo deserunt beatae ipsa. Enim repudiandae quam dolorum saepe laborum deserunt nihil ipsam.</div>
-				<div>Non quo ex dolor quasi incidunt quis exercitationem nihil fugit voluptatibus voluptatem libero doloremque distinctio
-					provident reiciendis eligendi. Numquam facere quod architecto molestias neque dicta illum consectetur assumenda tempora est.</div>
+			
+			<div class="px-4 py-4">
+				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae repellendus laudantium rem molestiae cum voluptatum natus adipisci illo sapiente incidunt! Velit nihil quibusdam ullam quo rem corporis odit ratione laudantium.</div>
+				<div>Vel debitis quis sit mollitia sed assumenda cupiditate. Itaque ab ex voluptatum possimus placeat explicabo veniam nemo iure. Eos dolor sequi praesentium doloremque laboriosam quam vitae quod veniam quidem dolores.</div>
+				<div>Architecto facilis ad hic molestias odit laborum consectetur asperiores quas facere dolorem quia repudiandae amet porro mollitia quae recusandae dicta consequatur dolorum animi commodi ut. Quod corporis optio atque iure!</div>
+				<div>Error praesentium sint hic eius nobis nisi quasi quaerat eligendi vel odit architecto possimus illo in maxime iste necessitatibus quia. Deserunt veniam eaque culpa vitae soluta officia unde voluptatem voluptate.</div>
+				<div>Amet atque iusto ullam modi obcaecati sunt odio culpa delectus minus illum tempore laborum id cum quis voluptatibus vero ea doloribus vel. Minima aspernatur deleniti optio repellat esse quod ab!</div>
+				<div>Vel dolores voluptatibus et qui consequuntur veniam sapiente? Laborum explicabo necessitatibus similique modi ullam dolor tempore quos doloremque impedit saepe mollitia a cum? Repellendus quam a suscipit reprehenderit expedita perspiciatis.</div>
+				<div>Porro aliquam officia corrupti fuga excepturi doloribus ullam asperiores repellat dolore perspiciatis incidunt accusamus aut ea maxime dolorum laborum tempora cupiditate soluta non blanditiis. Omnis corporis quia velit inventore doloremque.</div>
+				<div>Velit odio doloribus ducimus consequatur totam voluptatem minus fuga voluptatibus fugiat eius eum porro expedita nam quaerat necessitatibus eligendi alias quia eaque praesentium unde. Ducimus temporibus id explicabo inventore ipsam?</div>
+				<div>Sint rem officia itaque ut commodi voluptas temporibus nulla atque non quibusdam quidem assumenda quam harum ipsum minima voluptatibus ullam velit fugit cumque error! Amet suscipit asperiores et repellendus vel?</div>
+				<div>Pariatur alias ut eveniet rem corporis autem asperiores accusamus voluptate minus repudiandae culpa illo voluptatibus nam quis consectetur consequatur sit atque velit quae minima dolores labore odit illum omnis officia?</div>
 			</div>
 		</div>
 	</div>
