@@ -22,8 +22,8 @@ public class ArticleRepository {
 		return id;
 	}
 
-	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitFrom,
-			int limitTake) {
+	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
+			int limitFrom, int limitTake) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", IFNULL(M.nickname, '삭제된회원') AS extra__writerName");
@@ -50,7 +50,7 @@ public class ArticleRepository {
 				break;
 			}
 		}
-		
+
 		if (boardId != 0) {
 			sql.append("AND A.boardId = ?", boardId);
 		}
@@ -65,7 +65,7 @@ public class ArticleRepository {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append("FROM article AS A");
-		sql.append("WHERE id = ?", id);
+		sql.append("WHERE A.id = ?", id);
 
 		return MysqlUtil.selectRow(sql, Article.class);
 	}
@@ -124,6 +124,7 @@ public class ArticleRepository {
 		if (boardId != 0) {
 			sql.append("AND A.boardId = ?", boardId);
 		}
+
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 }

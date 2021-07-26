@@ -4,13 +4,16 @@ import java.util.List;
 
 import com.jhs.exam.exam2.container.Container;
 import com.jhs.exam.exam2.dto.Article;
+import com.jhs.exam.exam2.dto.Board;
 import com.jhs.exam.exam2.dto.ResultData;
 import com.jhs.exam.exam2.http.Rq;
 import com.jhs.exam.exam2.service.ArticleService;
+import com.jhs.exam.exam2.service.BoardService;
 import com.jhs.exam.exam2.util.Ut;
 
 public class UsrArticleController extends Controller {
 	private ArticleService articleService = Container.articleService;
+	private BoardService boardService = Container.boardService;
 
 	@Override
 	public void performAction(Rq rq) {
@@ -93,7 +96,7 @@ public class UsrArticleController extends Controller {
 		String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "title,body");
 		String searchKeyword = rq.getParam("searchKeyword", "");
 		
-		int itemsCountInAPage = 5; 
+		int itemsCountInAPage = 10; 
 		int page = rq.getIntParam("page", 1);
 		int boardId = rq.getIntParam("boardId", 0);
 		
@@ -101,6 +104,10 @@ public class UsrArticleController extends Controller {
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), boardId, searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 		
 		int totalPage = (int)Math.ceil((double)totalItemsCount / itemsCountInAPage);
+		
+		Board board = boardService.getBoardById(boardId);
+		
+		rq.setAttr("board", board);
 		
 		rq.setAttr("searchKeywordTypeCode", searchKeywordTypeCode);
 		rq.setAttr("page", page);
@@ -129,6 +136,7 @@ public class UsrArticleController extends Controller {
 		}
 
 		ResultData writeRd = articleService.write(boardId, memberId, title, body);
+		
 		int id = (int) writeRd.getBody().get("id");
 
 		redirectUri = redirectUri.replace("[NEW_ID]", id + "");

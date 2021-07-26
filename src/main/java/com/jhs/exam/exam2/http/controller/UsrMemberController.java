@@ -59,7 +59,7 @@ public class UsrMemberController extends Controller {
 		rq.setSessionAttr("loginedMemberJson", Ut.toJson(member, ""));
 		
 		String redirectUri = rq.getParam("redirectUri", "../article/list");
-
+		
 		rq.replace(loginRd.getMsg(), redirectUri);
 	}
 

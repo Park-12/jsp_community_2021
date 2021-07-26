@@ -122,9 +122,12 @@ INSERT INTO article
 SELECT 
 NOW(),
 NOW(),
-CAST(RAND() * (2-1) AS SIGNED) + 1,
-CAST(RAND() * (2-1) AS SIGNED) + 1,
+CAST(RAND() * (2 - 1) AS SIGNED) + 1,
+CAST(RAND() * (2 - 1) AS SIGNED) + 1,
 CONCAT('제목--', RAND()),
 CONCAT('내용--', RAND())
 FROM article;
 */
+
+
+
