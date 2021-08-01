@@ -1,9 +1,14 @@
 package com.jhs.exam.exam2.http.controller;
 
+import com.jhs.exam.exam2.container.Container;
 import com.jhs.exam.exam2.http.Rq;
 import com.jhs.exam.exam2.util.Ut;
 
 public class UsrHomeController extends Controller {
+	public void init() {
+		
+	}
+	
 	@Override
 	public void performAction(Rq rq) {
 		switch (rq.getActionMethodName()) {

@@ -5,13 +5,16 @@ import com.jhs.mysqliutil.MysqlUtil;
 import com.jhs.mysqliutil.SecSql;
 
 public class MemberRepository {
+	public void init() {
+
+	}
 
 	public Member getMemberByLoginId(String loginId) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT M.*");
 		sql.append("FROM member AS M");
 		sql.append("WHERE M.loginId = ?", loginId);
-		
+
 		return MysqlUtil.selectRow(sql, Member.class);
 	}
 
@@ -22,7 +25,7 @@ public class MemberRepository {
 		sql.append("WHERE M.name = ?", name);
 		sql.append("AND M.email = ?", email);
 		sql.append("LIMIT 1");
-		
+
 		return MysqlUtil.selectRow(sql, Member.class);
 	}
 

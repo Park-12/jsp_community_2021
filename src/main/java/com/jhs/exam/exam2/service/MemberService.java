@@ -7,7 +7,11 @@ import com.jhs.exam.exam2.repository.MemberRepository;
 import com.jhs.exam.exam2.util.Ut;
 
 public class MemberService {
-	private MemberRepository memberRepository = Container.memberRepository;
+	private MemberRepository memberRepository;
+	
+	public void init() {
+		memberRepository = Container.memberRepository;
+	}
 
 	public ResultData login(String loginId, String loginPw) {
 		Member member = getMemberByLoginId(loginId);
