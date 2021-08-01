@@ -31,7 +31,7 @@ public class UsrMemberController extends Controller {
 		case "findLoginId":
 			actionShowFindLoginId(rq);
 			break;
-		case "doFindLogin":
+		case "doFindLoginId":
 			actionDoFindLoginId(rq);
 			break;
 		default:
@@ -46,8 +46,29 @@ public class UsrMemberController extends Controller {
 	}
 
 	private void actionDoFindLoginId(Rq rq) {
-		// TODO Auto-generated method stub
+		String name = rq.getParam("name", "");
+		String email = rq.getParam("email", "");
 		
+		if (name.length() == 0) {
+			rq.historyBack("name(을)를 입력해주세요.");
+			return;
+		}
+		
+		if (email.length() == 0) {
+			rq.historyBack("email(을)를 입력해주세요.");
+			return;
+		}
+		
+		Member oldMember = memberService.getMemberByNameAndEmail(name, email);
+		
+		if (oldMember == null) {
+			rq.historyBack("일치하는 회원이 존재하지 않습니다.");
+			return;
+		}
+		
+		String replaceUri = "../member/login?loginId=" + oldMember.getLoginId();
+		rq.replace(Ut.f("해당 회원의 로그인 아이디는 `%s` 입니다.", oldMember.getLoginId()), replaceUri);
+		return;
 	}
 
 	private void actionDoJoin(Rq rq) {
@@ -87,8 +108,6 @@ public class UsrMemberController extends Controller {
 			rq.historyBack("email(을)를 입력해주세요.");
 			return;
 		}
-		
-		rq.debugParams();
 
 		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
