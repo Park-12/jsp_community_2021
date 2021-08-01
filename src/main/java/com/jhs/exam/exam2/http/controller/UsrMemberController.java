@@ -81,7 +81,7 @@ public class UsrMemberController extends Controller {
 			return;
 		}
 		
-		rq.print(joinRd.toString()); // 임시
+		rq.replace(joinRd.getMsg(), "../member/login");
 	}
 
 	private void actionShowJoin(Rq rq) {
