@@ -72,6 +72,8 @@ public class UsrMemberController extends Controller {
 			return;
 		}
 		
+		rq.debugParams();
+		
 		rq.print("여기까지 성공");
 
 		/*
