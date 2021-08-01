@@ -73,17 +73,15 @@ public class UsrMemberController extends Controller {
 		}
 		
 		rq.debugParams();
-		
-		rq.print("여기까지 성공");
 
-		/*
 		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
 		if (joinRd.isFail()) {
 			rq.historyBack(joinRd.getMsg());
 			return;
 		}
-		*/
+		
+		rq.print(joinRd.toString()); // 임시
 	}
 
 	private void actionShowJoin(Rq rq) {
