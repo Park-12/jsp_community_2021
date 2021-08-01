@@ -98,7 +98,7 @@ public class Ut {
 		}
 	}
 
-	public static String toPrettyJoson(Object obj, String defaultValue) {
+	public static String toPrettyJson(Object obj, String defaultValue) {
 		ObjectMapper om = new ObjectMapper();
 		om.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
 

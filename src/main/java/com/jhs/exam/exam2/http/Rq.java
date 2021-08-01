@@ -33,6 +33,10 @@ public class Rq {
 	
 	@Getter
 	@Setter
+	private boolean isAdmin = false;
+	
+	@Getter
+	@Setter
 	private boolean isLogined = false;
 	
 	@Getter
@@ -276,7 +280,11 @@ public class Rq {
 	public void debugParams() {
 		print("<h1>debugParams</h1>");
 		print("<pre>");
-		print(Ut.toPrettyJoson(getParamMap(), ""));
+		print(Ut.toPrettyJson(getParamMap(), ""));
 		print("</pre>");
+	}
+
+	public boolean isNotAdmin() {
+		return !isAdmin;
 	}
 }

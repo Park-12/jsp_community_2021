@@ -49,7 +49,6 @@ abstract public class DispatcherServlet extends HttpServlet {
 			}
 
 			break;
-			
 		case "adm":
 			switch (rq.getControllerName()) {
 			case "home":
@@ -75,6 +74,10 @@ abstract public class DispatcherServlet extends HttpServlet {
 		if (Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
 			return false;
 		}
+		
+		if (Container.needAdminInterceptor.runBeforeAction(rq) == false) {
+			return false;
+		}
 
 		return true;
 	}
@@ -82,4 +85,4 @@ abstract public class DispatcherServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
-}	
+}
