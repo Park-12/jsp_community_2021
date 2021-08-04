@@ -15,8 +15,8 @@ public class App implements ContainerComponent {
 	@Override
 	public void init() {
 		// 필수적으로 로딩되어야 하는 내용 불러오기
-		smtpGmailPw = Ut.getFileContents("c:/lib/shp/SmtpGmailPw.txt");
-		
+		smtpGmailPw = Ut.getFileContents("c:/work/shp/SmtpGmailPw.txt");
+
 		if (smtpGmailPw != null && smtpGmailPw.trim().length() > 0) {
 			ready = true;
 		}
@@ -25,6 +25,11 @@ public class App implements ContainerComponent {
 	public static boolean isDevMode() {
 		// 이 부분을 false로 바꾸면 production 모드 이다.
 		return true;
+	}
+	
+
+	private static boolean isProductMode() {
+		return isDevMode() == false;
 	}
 
 	// 정적 요소 세팅
@@ -43,5 +48,51 @@ public class App implements ContainerComponent {
 
 	public String getSmtpGmailPw() {
 		return smtpGmailPw;
+	}
+
+	public String getSiteName() {
+		return "레몬 커뮤니티";
+	}
+
+	public String getBaseUri() {
+		String appUrl = getSiteProtocol() + "://" + getSiteDomain();
+
+		if (getSitePort() != 80 && getSitePort() != 443) {
+			appUrl += ":" + getSitePort();
+		}
+
+		if (getContextName().length() > 0) {
+			appUrl += "/" + getContextName();
+		}
+
+		return appUrl;
+	}
+
+	private String getContextName() {
+		if (isProductMode()) {
+			return "";
+		}
+
+		return "jsp_community_2021";
+	}
+
+	private int getSitePort() {
+		return 8080;
+	}
+
+	private String getSiteDomain() {
+		return "localhost";
+	}
+
+	private String getSiteProtocol() {
+		return "http";
+	}
+
+	public String getLoginUri() {
+		return getBaseUri() + "/usr/member/login";
+	}
+
+	public String getNotifyEmailFromName() {
+		return "레몬 커뮤니티 알림봇";
 	}
 }
