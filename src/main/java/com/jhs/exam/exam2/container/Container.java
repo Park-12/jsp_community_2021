@@ -7,6 +7,7 @@ import com.jhs.exam.exam2.app.App;
 import com.jhs.exam.exam2.http.controller.AdmHomeController;
 import com.jhs.exam.exam2.http.controller.UsrArticleController;
 import com.jhs.exam.exam2.http.controller.UsrHomeController;
+import com.jhs.exam.exam2.http.controller.UsrLikeController;
 import com.jhs.exam.exam2.http.controller.UsrMemberController;
 import com.jhs.exam.exam2.interceptor.BeforeActionInterceptor;
 import com.jhs.exam.exam2.interceptor.NeedAdminInterceptor;
@@ -18,6 +19,7 @@ import com.jhs.exam.exam2.repository.MemberRepository;
 import com.jhs.exam.exam2.service.ArticleService;
 import com.jhs.exam.exam2.service.BoardService;
 import com.jhs.exam.exam2.service.EmailService;
+import com.jhs.exam.exam2.service.LikeService;
 import com.jhs.exam.exam2.service.MemberService;
 
 public class Container {
@@ -46,6 +48,11 @@ public class Container {
 	public static AdmHomeController admHomeController;
 
 	public static EmailService emailService;
+	
+	public static UsrLikeController usrLikeController;
+	public static LikeService likeService;
+	public static LikeRepository likeRepository;
+	
 
 	public static void init() {
 		containerComponents = new ArrayList<>();
