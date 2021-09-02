@@ -15,6 +15,7 @@ import com.jhs.exam.exam2.interceptor.NeedLoginInterceptor;
 import com.jhs.exam.exam2.interceptor.NeedLogoutInterceptor;
 import com.jhs.exam.exam2.repository.ArticleRepository;
 import com.jhs.exam.exam2.repository.BoardRepository;
+import com.jhs.exam.exam2.repository.LikeRepository;
 import com.jhs.exam.exam2.repository.MemberRepository;
 import com.jhs.exam.exam2.service.ArticleService;
 import com.jhs.exam.exam2.service.BoardService;
@@ -49,10 +50,9 @@ public class Container {
 
 	public static EmailService emailService;
 	
-	public static UsrLikeController usrLikeController;
-	public static LikeService likeService;
 	public static LikeRepository likeRepository;
-	
+	public static LikeService likeService;
+	public static UsrLikeController usrLikeController;
 
 	public static void init() {
 		containerComponents = new ArrayList<>();
@@ -62,10 +62,12 @@ public class Container {
 		memberRepository = addContainerComponent(new MemberRepository());
 		boardRepository = addContainerComponent(new BoardRepository());
 		articleRepository = addContainerComponent(new ArticleRepository());
+		likeRepository = addContainerComponent(new LikeRepository());
 		
 		memberService = addContainerComponent(new MemberService());
 		boardService = addContainerComponent(new BoardService());
 		articleService = addContainerComponent(new ArticleService());
+		likeService = addContainerComponent(new LikeService());
 
 		beforeActionInterceptor = addContainerComponent(new BeforeActionInterceptor());
 		needLoginInterceptor = addContainerComponent(new NeedLoginInterceptor());
@@ -75,6 +77,7 @@ public class Container {
 		usrMemberController = addContainerComponent(new UsrMemberController());
 		usrArticleController = addContainerComponent(new UsrArticleController());
 		usrHomeController = addContainerComponent(new UsrHomeController());
+		usrLikeController = addContainerComponent(new UsrLikeController());
 		
 		admHomeController = addContainerComponent(new AdmHomeController());
 		

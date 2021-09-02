@@ -12,9 +12,11 @@ import com.jhs.exam.exam2.util.Ut;
 
 public class ArticleService implements ContainerComponent {
 	private ArticleRepository articleRepository;
+	private LikeService likeService;
 	
 	public void init() {
 		articleRepository = Container.articleRepository;
+		likeService = Container.likeService;
 	}
 
 	public ResultData write(int boardId, int memberId, String title, String body) {
@@ -38,8 +40,14 @@ public class ArticleService implements ContainerComponent {
 
 	public Article getForPrintArticleById(Member actor, int id) {
 		Article article = articleRepository.getForPrintArticleById(id);
+		
+		if ( article == null ) {
+			return null;
+		}
 
-		updateForPrintData(actor, article);
+		if ( actor != null ) {
+			updateForPrintData(actor, article);
+		}
 
 		return article;
 	}
@@ -51,6 +59,16 @@ public class ArticleService implements ContainerComponent {
 
 		boolean actorCanModify = actorCanModify(actor, article).isSuccess();
 		boolean actorCanDelete = actorCanDelete(actor, article).isSuccess();
+		
+		boolean actorCanLike = likeService.actorCanLike(article, actor);
+		boolean actorCanCancelLike = likeService.actorCanCancelLike(article, actor);
+		boolean actorCanDislike = likeService.actorCanDislike(article, actor);
+		boolean actorCanCancelDislike = likeService.actorCanCancelDislike(article, actor);
+
+		article.getExtra().put("actorCanLike", actorCanLike);
+		article.getExtra().put("actorCanCancelLike", actorCanCancelLike);
+		article.getExtra().put("actorCanDislike", actorCanDislike);
+		article.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);
 
 		article.setExtra__actorCanModify(actorCanModify);
 		article.setExtra__actorCanDelete(actorCanDelete);

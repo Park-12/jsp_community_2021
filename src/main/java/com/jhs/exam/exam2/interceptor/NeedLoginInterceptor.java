@@ -1,6 +1,5 @@
 package com.jhs.exam.exam2.interceptor;
 
-import com.jhs.exam.exam2.container.Container;
 import com.jhs.exam.exam2.http.Rq;
 
 public class NeedLoginInterceptor extends Interceptor {

@@ -1,18 +1,34 @@
 package com.jhs.exam.exam2.service;
 
+import com.jhs.exam.exam2.container.Container;
+import com.jhs.exam.exam2.container.ContainerComponent;
+import com.jhs.exam.exam2.dto.Article;
 import com.jhs.exam.exam2.dto.Member;
-import com.jhs.exam.exam2.dto.ResultData;
+import com.jhs.exam.exam2.repository.LikeRepository;
 
-public class LikeService {
+public class LikeService implements ContainerComponent {
 
-	public ResultData doLike(Member actor, int id) {
-		int id = actor.getId();
+	private LikeRepository likeRepository;
 
-		if (memberId != writerMemberId) {
-			return ResultData.from("F-1", "권한이 없습니다.");
-		}
-
-		return ResultData.from("S-1", "수정이 가능합니다.");
+	@Override
+	public void init() {
+		likeRepository = Container.likeRepository;
 	}
 
+	public boolean actorCanLike(Article article, Member actor) {
+		return likeRepository.getPoint("article", article.getId(), actor.getId()) == 0;
+	}
+
+	public boolean actorCanCancelLike(Article article, Member actor) {
+		return likeRepository.getPoint("article", article.getId(), actor.getId()) > 0;
+	}
+
+	public boolean actorCanDislike(Article article, Member actor) {
+		return likeRepository.getPoint("article", article.getId(), actor.getId()) == 0;
+	}
+
+	public boolean actorCanCancelDislike(Article article, Member actor) {
+		return likeRepository.getPoint("article", article.getId(), actor.getId()) < 0;
+	}
+	
 }

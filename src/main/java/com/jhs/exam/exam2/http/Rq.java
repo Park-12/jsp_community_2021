@@ -292,4 +292,8 @@ public class Rq {
 	public boolean isNotAdmin() {
 		return !isAdmin;
 	}
+
+	public Member getAttribute(String string) {
+		return getAttribute(string);
+	}
 }

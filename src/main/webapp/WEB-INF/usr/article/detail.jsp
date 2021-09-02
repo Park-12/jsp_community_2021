@@ -65,20 +65,43 @@
 					</div>
 
 					<div class="btns mt-3">
-						<c:choose>
-							<c:when test="${likecheck eq '0' or empty likecheck}">
-								<!-- likecheck가0이면 빈하트-->
-								<img src="https://i.ibb.co/wwLVyPw/before-heart.png"
-									alt="before-heart" id="btn_like" align="left"
-									style="cursor: pointer; width: 20px;">
-							</c:when>
-							<c:otherwise>
-								<!-- likecheck가1이면 빨간 하트-->
-								<img src="https://i.ibb.co/Pj7rqqS/after-heart.png"
-									alt="after-heart" id="btn_like"
-									align="left" style="cursor: pointer; width: 20px;">
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${article.extra.actorCanLike}">
+							<a class="btn btn-primary" href="${param.listUrl}">
+								<span>
+									<i class="fas fa-thumbs-up"></i>
+								</span>
+								<span>좋아요</span>
+							</a>
+						</c:if>
+
+						<c:if test="${article.extra.actorCanCancelLike}">
+							<a class="btn btn-info" href="${param.listUrl}">
+								<span>
+									<i class="fas fa-slash"></i>
+								</span>
+								<span>좋아요 취소</span>
+							</a>
+						</c:if>
+
+						<c:if test="${article.extra.actorCanDislike}">
+							<a class="btn btn-danger" href="${param.listUrl}">
+								<span>
+									<i class="fas fa-thumbs-down"></i>
+								</span>
+								<span>싫어요</span>
+							</a>
+						</c:if>
+
+						<c:if test="${article.extra.actorCanCancelDislike}">
+							<a class="btn btn-info" href="${param.listUrl}">
+								<span>
+									<span>
+										<i class="fas fa-slash"></i>
+									</span>
+								</span>
+								<span>싫어요 취소</span>
+							</a>
+						</c:if>
 						<c:if test="${article.extra__actorCanModify}">
 							<a href="../article/modify?id=${article.id}" class="btn btn-link">
 								<span>
