@@ -50,6 +50,16 @@
 							<span class="badge">수정날짜</span>
 							<span class="text-gray-600 text-light">${article.updateDate}</span>
 						</div>
+						
+						<div>
+							<span class="badge">좋아요</span>
+							<span class="text-gray-600 text-light">${article.extra__likeOnlyPoint}</span>
+						</div>
+						
+						<div>
+							<span class="badge">싫어요</span>
+							<span class="text-gray-600 text-light">${article.extra__dislikeOnlyPoint}</span>
+						</div>
 					</div>
 
 					<div

@@ -128,3 +128,15 @@ CONCAT('제목--', RAND()),
 CONCAT('내용--', RAND())
 FROM article;
 */
+
+# 좋아요 테이블
+CREATE TABLE `like` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    `point` SMALLINT(1) NOT NULL,
+    INDEX (`relTypeCode`, `relId`, `memberId`) # 인덱스 추가
+);
