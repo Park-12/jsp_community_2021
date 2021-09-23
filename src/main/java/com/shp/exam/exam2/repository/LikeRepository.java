@@ -9,7 +9,6 @@ public class LikeRepository implements ContainerComponent {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -28,7 +27,7 @@ public class LikeRepository implements ContainerComponent {
 	public Like getLikeByRelTypeCodeAndMemberId(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT L.*");
-		sql.append("FROM islike AS L");
+		sql.append("FROM `like` AS L");
 		sql.append("WHERE L.relTypeCode = ?", relTypeCode);
 		sql.append("AND L.relId = ?", relId);
 		sql.append("AND L.memberId = ?", memberId);
@@ -39,7 +38,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void likeInsert(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("INSERT INTO isLike");
+		sql.append("INSERT INTO `like`");
 		sql.append("SET regDate = NOW()");
 		sql.append(", updateDate = NOW()");
 		sql.append(", relTypeCode = ?", relTypeCode);
@@ -52,7 +51,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void likeDelete(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("DELETE FROM islike");
+		sql.append("DELETE FROM `like`");
 		sql.append("WHERE relTypeCode = ?", relTypeCode);
 		sql.append("AND relId = ?", relId);
 		sql.append("AND memberId = ?", memberId);
@@ -64,7 +63,7 @@ public class LikeRepository implements ContainerComponent {
 	public Like getDisLikeByRelTypeCodeAndMemberId(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT L.*");
-		sql.append("FROM islike AS L");
+		sql.append("FROM `like` AS L");
 		sql.append("WHERE L.relTypeCode = ?", relTypeCode);
 		sql.append("AND L.relId = ?", relId);
 		sql.append("AND L.memberId = ?", memberId);
@@ -75,7 +74,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void disLikeInsert(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("INSERT INTO isLike");
+		sql.append("INSERT INTO `like`");
 		sql.append("SET regDate = NOW()");
 		sql.append(", updateDate = NOW()");
 		sql.append(", relTypeCode = ?", relTypeCode);
@@ -89,7 +88,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void disLikeDelete(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("DELETE FROM islike");
+		sql.append("DELETE FROM `like`");
 		sql.append("WHERE relTypeCode = ?", relTypeCode);
 		sql.append("AND relId = ?", relId);
 		sql.append("AND memberId = ?", memberId);
@@ -100,7 +99,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void likeUpdate(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("UPDATE islike");
+		sql.append("UPDATE `like`");
 		sql.append("SET updateDate = NOW()");
 		sql.append(", `point` = -1");
 		sql.append("WHERE relTypeCode = ?", relTypeCode);
@@ -112,7 +111,7 @@ public class LikeRepository implements ContainerComponent {
 
 	public void disLikeUpdate(String relTypeCode, int relId, int memberId) {
 		SecSql sql = new SecSql();
-		sql.append("UPDATE islike");
+		sql.append("UPDATE `like`");
 		sql.append("SET updateDate = NOW()");
 		sql.append(", `point` = 1");
 		sql.append("WHERE relTypeCode = ?", relTypeCode);
