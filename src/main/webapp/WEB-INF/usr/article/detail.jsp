@@ -20,10 +20,7 @@
 
 				<div class="py-4">
 					<div class="grid gap-3" style="grid-template-columns: 100px 1fr;">
-						<div>
-							<img class="rounded-full w-full"
-								src="https://i.pravatar.cc/200?img=37" alt="">
-						</div>
+
 						<div>
 							<span class="badge badge-outline">제목</span>
 							<div>${article.titleForPrint}</div>
@@ -38,7 +35,7 @@
 
 						<div>
 							<span class="badge badge-accent">작성자</span>
-							<span>${article.memberId}</span>
+							<span>${article.extra__writerName}</span>
 						</div>
 
 						<div>
@@ -50,89 +47,90 @@
 							<span class="badge">수정날짜</span>
 							<span class="text-gray-600 text-light">${article.updateDate}</span>
 						</div>
-						
+
 						<div>
-							<span class="badge">좋아요</span>
-							<span class="text-gray-600 text-light">${article.extra__likeOnlyPoint}</span>
+							<span class="badge badge-secondary">좋아요</span>
+							<span>${article.extra__likeOnlyPoint}</span>
+						</div>
+
+						<div>
+							<span class="badge badge-secondary">싫어요</span>
+							<span>${article.extra__dislikeOnlyPoint}</span>
 						</div>
 						
-						<div>
-							<span class="badge">싫어요</span>
-							<span class="text-gray-600 text-light">${article.extra__dislikeOnlyPoint}</span>
-						</div>
-					</div>
+						<div
+							class="block mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3 f">
+							<span class="badge badge-outline">본문</span>
 
-					<div
-						class="block mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3">
-						<span class="badge badge-outline">본문</span>
-
-						<div class="mt-2">
-							<img class="rounded" src="https://picsum.photos/id/237/300/300"
-								alt="" />
+							<div>${article.bodySummaryForPrint}</div>
 						</div>
 
-						<div>${article.bodySummaryForPrint}</div>
-					</div>
-
-					<div class="btns mt-3">
-						<c:if test="${article.extra.actorCanLike}">
-							<a class="btn btn-primary" href="${param.listUrl}">
-								<span>
-									<i class="fas fa-thumbs-up"></i>
-								</span>
-								<span>좋아요</span>
-							</a>
-						</c:if>
-
-						<c:if test="${article.extra.actorCanCancelLike}">
-							<a class="btn btn-info" href="${param.listUrl}">
-								<span>
-									<i class="fas fa-slash"></i>
-								</span>
-								<span>좋아요 취소</span>
-							</a>
-						</c:if>
-
-						<c:if test="${article.extra.actorCanDislike}">
-							<a class="btn btn-danger" href="${param.listUrl}">
-								<span>
-									<i class="fas fa-thumbs-down"></i>
-								</span>
-								<span>싫어요</span>
-							</a>
-						</c:if>
-
-						<c:if test="${article.extra.actorCanCancelDislike}">
-							<a class="btn btn-info" href="${param.listUrl}">
-								<span>
-									<span>
-										<i class="fas fa-slash"></i>
-									</span>
-								</span>
-								<span>싫어요 취소</span>
-							</a>
-						</c:if>
-						<c:if test="${article.extra__actorCanModify}">
-							<a href="../article/modify?id=${article.id}" class="btn btn-link">
-								<span>
-									<i class="fas fa-edit"></i>
-								</span>
-								<span>수정</span>
-							</a>
-						</c:if>
-						<c:if test="${article.extra__actorCanDelete}">
-							<a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;"
-								href="../article/doDelete?id=${article.id}" class="btn btn-link">
-								<span>
-									<i class="fas fa-trash-alt"></i>
-								</span>
-								<span>삭제</span>
-							</a>
-						</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
+</section>
+
+<section class="section section-article-detail px-4">
+	<div class="btns container mx-auto">
+
+		<c:if
+			test="${article.extra__actorCanLike || article.extra__actorCanCancelDisLike}">
+			<a class="btn btn-primary"
+				href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${rq.encodedCurrentUri}">
+				<span>
+					<i class="far fa-thumbs-up"></i>
+				</span>
+				<span>좋아요</span>
+			</a>
+		</c:if>
+		<c:if test="${article.extra__actorCanCancelLike}">
+			<a class="btn btn-primary"
+				href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${rq.encodedCurrentUri}">
+				<span>
+					<i class="fas fa-thumbs-up text-red-500"></i>
+				</span>
+				<span>좋아요</span>
+			</a>
+		</c:if>
+		<c:if
+			test="${article.extra__actorCanDisLike || article.extra__actorCanCancelLike}">
+			<a class="btn btn-danger"
+				href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${rq.encodedCurrentUri}">
+				<span>
+					<i class="far fa-thumbs-down"></i>
+				</span>
+				<span>싫어요</span>
+			</a>
+		</c:if>
+		<c:if test="${article.extra__actorCanCancelDisLike}">
+			<a class="btn btn-danger"
+				href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${rq.encodedCurrentUri}">
+				<span>
+					<i class="fas fa-thumbs-down text-red-500"></i>
+				</span>
+				<span>싫어요</span>
+			</a>
+		</c:if>
+
+		<c:if test="${article.extra__actorCanModify}">
+			<a href="../article/modify?id=${article.id}" class="btn btn-link">
+				<span>
+					<i class="fas fa-edit"></i>
+				</span>
+				<span>수정</span>
+			</a>
+		</c:if>
+		<c:if test="${article.extra__actorCanDelete}">
+			<a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;"
+				href="../article/doDelete?id=${article.id}&boardId=${article.boardId}"
+				class="btn btn-link">
+				<span>
+					<i class="fas fa-trash-alt"></i>
+				</span>
+				<span>삭제</span>
+			</a>
+		</c:if>
 	</div>
 </section>
 
