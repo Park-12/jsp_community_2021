@@ -94,11 +94,8 @@ const rqParams = ${rq.paramMapJsonStr};
 		<header class="mobile-top-bar fixed z-40 inset-0 h-10 font-bold bg-white shadow lg:hidden">
 			<div class="h-full flex">
 				<a href="../../" class="logo flex items-center pl-4 hover:underline hover:text-red-500">
-					<span>
-						<i class="far fa-lemon"></i>
-					</span>
-					<span class="flex"> &nbsp;Lemon </span>
-				</a>
+					
+					<span class="flex"> &nbsp; 🍎 SH BLOG </a>
 
 				<div class="flex-grow"></div>
 
@@ -143,10 +140,8 @@ const rqParams = ${rq.paramMapJsonStr};
 		<header class="top-bar fixed z-40 inset-0 h-12 font-bold bg-white shadow hidden lg:block">
 			<div class="h-full container mx-auto flex">
 				<a href="../../" class="logo flex items-center px-4 hover:underline hover:text-red-500">
-					<span>
-						<i class="far fa-lemon"></i>
-					</span>
-					<span class="flex"> &nbsp;Lemon </span>
+					
+					<span class="flex"> &nbsp; 🍎 SH BLOG </span>
 				</a>
 
 				<div class="flex-grow"></div>
