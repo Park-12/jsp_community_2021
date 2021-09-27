@@ -29,5 +29,4 @@ public class BeforeActionInterceptor extends Interceptor {
 
 		return true;
 	}
-
 }

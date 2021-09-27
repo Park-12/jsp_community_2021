@@ -18,12 +18,15 @@ public class MemberService implements ContainerComponent {
 	}
 
 	public ResultData login(String loginId, String loginPw) {
+		// loginId를 이용해 member값 구함
 		Member member = getMemberByLoginId(loginId);
 
+		// member 값이 존재하지 않을 경우
 		if (member == null) {
 			return ResultData.from("F-1", "존재하지 않는 회원의 로그인아이디 입니다.");
 		}
 
+		// member의 loginPw과 입력받은 loginPw가 일치하지 않을 경우
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return ResultData.from("F-2", "비밀번호가 일치하지 않습니다.");
 		}
@@ -35,12 +38,14 @@ public class MemberService implements ContainerComponent {
 			String email) {
 		Member oldMember = getMemberByLoginId(loginId);
 
+		// 로그인 아이디 존재 확인
 		if (oldMember != null) {
 			return ResultData.from("F-1", Ut.f("%s(은)는 이미 사용 중인 로그인 아이디입니다.", loginId));
 		}
 
 		oldMember = getMemberByNameAndEmail(name, email);
 
+		// 이메일 존재 확인
 		if (oldMember != null) {
 			return ResultData.from("F-2", Ut.f("%s님은 이미 이메일 주소 `%s`(으)로 이미 가입하셨습니다.", name, email));
 		}
@@ -62,14 +67,9 @@ public class MemberService implements ContainerComponent {
 		return member.getAuthLevel() >= 7;
 	}
 
-	public void sendTempLoginPwToEmail() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public ResultData sendTempLoginPwToEmail(Member actor) {
 		App app = Container.app;
-		
+
 		// 메일 제목과 내용 만들기
 		String siteName = app.getSiteName();
 		String siteLoginUrl = app.getLoginUri();
@@ -77,7 +77,7 @@ public class MemberService implements ContainerComponent {
 		String tempPassword = Ut.getTempPassword(6);
 		String body = "<h1>임시 패스워드 : " + tempPassword + "</h1>";
 		body += "<a href=\"" + siteLoginUrl + "\" target=\"_blank\">로그인 하러가기</a>";
-		
+
 		if (actor.getEmail().length() == 0) {
 			return ResultData.from("F-0", "해당 회원의 이메일이 없습니다.");
 		}
