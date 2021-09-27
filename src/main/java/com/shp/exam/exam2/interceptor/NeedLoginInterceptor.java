@@ -1,5 +1,6 @@
 package com.shp.exam.exam2.interceptor;
 
+import com.shp.exam.exam2.dto.ResultData;
 import com.shp.exam.exam2.http.Rq;
 
 public class NeedLoginInterceptor extends Interceptor {
@@ -18,6 +19,7 @@ public class NeedLoginInterceptor extends Interceptor {
 		case "/usr/article/detail":
 		case "/usr/home/main":
 		case "/usr/home/doSendMail":
+		case "/usr/member/getData":
 		case "/usr/member/login":
 		case "/usr/member/doLogout":
 		case "/usr/member/doLogin":
@@ -32,7 +34,12 @@ public class NeedLoginInterceptor extends Interceptor {
 		}
 
 		if (rq.isNotLogined()) {
-			rq.replace("로그인 후 이용해주세요.", "../member/login?afterLoginUri=" + rq.getEncodedAfterLoginUri());
+			if ( rq.isAjax() ) {
+				rq.json(ResultData.from("F-A", "로그인 후 이용해주세요."));
+			}
+			else {
+				rq.replace("로그인 후 이용해주세요.", "../member/login?afterLoginUri=" + rq.getEncodedAfterLoginUri());
+			}
 
 			return false;
 		}
