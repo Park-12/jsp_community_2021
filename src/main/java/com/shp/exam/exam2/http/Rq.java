@@ -296,4 +296,8 @@ public class Rq {
 	public Member getAttribute(String string) {
 		return getAttribute(string);
 	}
+	
+	public void json(Object obj) {
+		print(Ut.toJson(obj, "{}"));
+	}
 }
