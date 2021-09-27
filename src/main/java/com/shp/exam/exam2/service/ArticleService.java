@@ -12,10 +12,12 @@ import com.shp.exam.exam2.util.Ut;
 
 public class ArticleService implements ContainerComponent {
 	private ArticleRepository articleRepository;
+	private MemberService memberService;
 	private LikeService likeService;
-	
+
 	public void init() {
 		articleRepository = Container.articleRepository;
+		memberService = Container.memberService;
 		likeService = Container.likeService;
 	}
 
@@ -25,27 +27,29 @@ public class ArticleService implements ContainerComponent {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(Member actor, int boardId, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage, int page) {
+	public List<Article> getForPrintArticles(Member actor, int boardId, String searchKeywordTypeCode,
+			String searchKeyword, int itemsCountInAPage, int page) {
 		int limitFrom = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
-		
-		List<Article> articles = articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword, limitFrom, limitTake);
-		
-		for ( Article article : articles ) {
+
+		List<Article> articles = articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword,
+				limitFrom, limitTake);
+
+		for (Article article : articles) {
 			updateForPrintData(actor, article);
 		}
-		
+
 		return articles;
 	}
 
 	public Article getForPrintArticleById(Member actor, int id) {
 		Article article = articleRepository.getForPrintArticleById(id);
-		
-		if ( article == null ) {
+
+		if (article == null) {
 			return null;
 		}
 
-		if ( actor != null ) {
+		if (actor != null) {
 			updateForPrintData(actor, article);
 		}
 
@@ -56,12 +60,12 @@ public class ArticleService implements ContainerComponent {
 		if (actor == null) {
 			return;
 		}
-		
+
 		boolean actorCanLike = likeService.actorCanLike(article, actor);
 		boolean actorCanCancelLike = likeService.actorCanCancelLike(article, actor);
 		boolean actorCanDislike = likeService.actorCanDislike(article, actor);
 		boolean actorCanCancelDislike = likeService.actorCanCancelDislike(article, actor);
-		
+
 		article.setExtra__actorCanLike(actorCanLike);
 		article.setExtra__actorCanCancelLike(actorCanCancelLike);
 		article.setExtra__actorCanDisLike(actorCanDislike);
@@ -100,6 +104,10 @@ public class ArticleService implements ContainerComponent {
 	public ResultData actorCanDelete(Member member, Article article) {
 		int memberId = member.getId();
 		int writerMemberId = article.getMemberId();
+		
+		if ( memberService.isAdmin(member) ) {
+			return ResultData.from("S-2", "관리자권한으로 삭제가 가능합니다.");
+		}
 
 		if (memberId != writerMemberId) {
 			return ResultData.from("F-1", "권한이 없습니다.");
@@ -109,7 +117,7 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
-		return articleRepository.getArticlesCount(boardId,  searchKeywordTypeCode, searchKeyword);
+		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 }
